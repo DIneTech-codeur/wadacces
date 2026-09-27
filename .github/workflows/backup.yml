@@ -2,8 +2,8 @@ name: Sauvegarde quotidienne de la base
 
 on:
   schedule:
-    # Tous les jours à 02:00 UTC (02:00 à Dakar)
-    - cron: "0 2 * * *"
+    # Tous les jours à 01:00 UTC (02:00 au Bénin)
+    - cron: "0 1 * * *"
   workflow_dispatch: # permet aussi de lancer la sauvegarde à la main
 
 jobs:
@@ -27,6 +27,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           BACKUP_DIR: backups
         run: |
+          export PATH="/usr/lib/postgresql/18/bin:$PATH"
           chmod +x scripts/backup.sh
           ./scripts/backup.sh
 
